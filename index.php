@@ -46,6 +46,12 @@ if (!isset($_SESSION['logged_in']) && !isset($_POST['username'])) {
         th, td {
             border: 1px solid #e5e7eb;
         }
+        .logo {
+            max-width: 150px; /* Atur ukuran maksimum logo */
+            height: auto;
+            display: block;
+            margin: 0 auto 1rem; /* Tengah dan beri jarak bawah */
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -73,7 +79,8 @@ if (!isset($_SESSION['logged_in']) && !isset($_POST['username'])) {
         <!-- Sidebar -->
         <div class="fixed inset-y-0 left-0 w-64 bg-blue-900 text-white sidebar">
             <div class="p-4">
-                <h2 class="text-xl font-bold">Sistem Inventory</h2>
+                <img src="images/logo.png" alt="Logo Sistem Inventory" class="logo">
+                <h2 class="text-xl font-bold text-center">Sistem Inventory</h2>
             </div>
             <nav class="mt-4">
                 <ul>
@@ -364,18 +371,18 @@ if (!isset($_SESSION['logged_in']) && !isset($_POST['username'])) {
         // Update dashboard
         function updateDashboard() {
             // Hitung total masuk
-            fetchData('barang_masuk.php', (masukData) => {
-                const totalMasuk = masukData.reduce((sum, item) => sum + parseInt(item.jumlah), 0);
+            fetchData('barang_masuk.php', (data) => {
+                const totalMasuk = data.reduce((sum, item) => sum + parseInt(item.jumlah), 0);
                 document.getElementById('total-masuk').textContent = totalMasuk;
             });
             // Hitung total keluar
-            fetchData('barang_keluar.php', (keluarData) => {
-                const totalKeluar = keluarData.reduce((sum, item) => sum + parseInt(item.jumlah), 0);
+            fetchData('barang_keluar.php', (data) => {
+                const totalKeluar = data.reduce((sum, item) => sum + parseInt(item.jumlah), 0);
                 document.getElementById('total-keluar').textContent = totalKeluar;
             });
             // Hitung total sisa stok
-            fetchData('sisa_stok.php', (stokData) => {
-                const sisaStok = stokData.reduce((sum, item) => sum + parseInt(item.jumlah), 0);
+            fetchData('sisa_stok.php', (data) => {
+                const sisaStok = data.reduce((sum, item) => sum + parseInt(item.jumlah), 0);
                 document.getElementById('sisa-stok').textContent = sisaStok;
             });
         }
